@@ -1,0 +1,18 @@
+<h1>Add Book Details</h1>
+
+<form action="addbook/" method="post">
+{% csrf_token %}
+Title:<br>
+<input name="title">
+<br><br>
+Author:<br>
+<input name="author">
+<br><br>
+Summary:<br>
+<input name="summary">
+<br><br>
+ISBN:<br>
+<input name="isbn" type="text"
+<br><br>
+<input type="submit" value="Submit">
+</form>

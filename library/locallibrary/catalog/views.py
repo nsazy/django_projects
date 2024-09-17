@@ -25,3 +25,17 @@ def index(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
+
+def addbook(request):
+  template = loader.get_template('addbook.html')
+  return HttpResponse(template.render({}, request))
+
+def addrecord(request):
+  a = request.POST['first']
+  b = request.POST['last']
+  c = request.POST['phone']
+  d = request.POST['joineddate']
+  member = Member(firstname=x, lastname=y, phone=a, joined_date=b)
+  member.save()
+  return HttpResponseRedirect(reverse('index'))
+
