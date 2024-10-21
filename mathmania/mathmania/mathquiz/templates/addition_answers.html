@@ -1,0 +1,46 @@
+
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+    <button><a href="{% url 'home_page'%}">Go To Home Page</a></button>
+    <button><a href="{% url 'add'%}">Do More Problems</a></button>
+   
+    <div>
+        
+        <table>
+            
+            <tr>
+                {% for item in problemList %}
+                <td class="answerscss">
+                <label>{{ item.numerator }}</label><BR>
+                <label>+</label><BR>
+                <label> {{ item.denominator }}</label><BR>
+                <label>-----------------------</label><BR>
+                {% if item.answerValue == True %} 
+                    <label class="correct"> {{ item.answer}}</label><BR>
+                {% else %}
+                    <label> {{ item.answer}}</label><BR>
+                {% endif %}
+                </td>
+                <BR>
+                {% endfor %}
+            </tr>
+           
+        </table>
+            
+        
+    </div>
+{% endblock %}
+        
+
+    
+        
+    
+
+
+
+
+   
