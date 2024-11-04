@@ -1,0 +1,17 @@
+<html>
+
+    {% block title %}
+    Register New User
+    {% endblock %}
+
+    {% block content %}
+    <h1>User Login</h1>
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        {{ loginform.as_p }}
+        <button>Login</button>
+    </form>
+    {% endblock %}
+
+</html>
+

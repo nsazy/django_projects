@@ -3,7 +3,7 @@
 //   constructor(a,b){
 //     if (a > b){
 //     //create elements
-//    this.container = document.createElement('div');
+//    this.div = document.createElement('div');
 //    this.numerator = document.createElement("label");
 //    this.div1 = document.createElement("div");
 //    this.denominiator = document.createElement("label");
@@ -22,6 +22,7 @@
 //    this.input.id = "answer";
 //    this.input.style = "width:200px;height:40px; text-align: center"
 //    this.button.textContent = "Next";
+ 
 //    this.button.setAttribute('onclick', "nextProblem()");
 
 //    //append element to the container
@@ -34,7 +35,7 @@
 //    this.container.appendChild(this.button);
 //   }
 //   else{
-//    this.container = document.createElement('div');
+//    this.div = document.createElement('div');
 //    this.numerator = document.createElement("label");
 //    this.div1 = document.createElement("div");
 //    this.denominiator = document.createElement("label");
@@ -215,3 +216,45 @@
 //{% load django_bootstrap5 %}
   //    {% bootstrap_css %}
    //   {% bootstrap_javascript %}
+
+   //onload="initProblem('{{add}}')"
+
+//    <script>
+//    window.onload = function(){
+//        addObject.displayProblem();
+//     }  
+// </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+data.forEach(element => {
+      
+  html += `
+  <label>{element.numerator}</label><BR>
+  <label>+</label><BR>
+  <label> {eleemnt.denominator}</label><BR>
+  <label>-----------------------</label><BR>
+      if item.answerValue == True 
+          <label class="correct"> {element.answer}</label><BR>
+      else 
+          <label> {element.answer}</label><BR>
+    <BR>`
+    container.appendChild(div);
+});
+
+// const container = document.getElementById('container');
+//     data.forEach(element => {
+      
+//       html += `
+//       <label>{element.numerator}</label><BR>
+//       <label>+</label><BR>
+//       <label> {eleemnt.denominator}</label><BR>
+//       <label>-----------------------</label><BR>
+//           if item.answerValue == True 
+//               <label class="correct"> {element.answer}</label><BR>
+//           else 
+//               <label> {element.answer}</label><BR>
+//         <BR>`
+//         container.appendChild(div);
+//     });

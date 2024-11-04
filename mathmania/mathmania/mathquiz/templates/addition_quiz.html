@@ -2,19 +2,25 @@
 {% load static %}
 
 {% block content %}
-<body onload="DisplayProblem()" >
- 
 
+
+<body onload="addObject.displayProblem()">
+
+
+ 
 <div class = "newdiv">
     
-    <div  id ="addMath">
-     
-    </div>
+    <div class="submiAnswer" id ="addMath"></div>
+    <script> 
+        const container = document.getElementById("addMath");
+        const addObject = new Add(container,"{{add}}");
+    </script>
    
 
 
 </div>
 
+      
 </body>
 {% endblock %}
 

@@ -1,5 +1,5 @@
 {% load static %}
-{% extends "base.html" %}
+
 <!doctype html>
 <html>
         
@@ -8,10 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{% static 'math_script.js' %}"></script>
+    
     <link href="{% static 'math.css' %}" rel="stylesheet">
 </head>
        
-    </head>
+   
       <body>{% block content %}{% endblock %}</body>
+      <script src="{% static 'math_script.js' %}"></script>
 </html>
