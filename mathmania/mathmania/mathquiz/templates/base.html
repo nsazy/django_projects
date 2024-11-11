@@ -1,24 +1,24 @@
 {% load static %}
 
+<!DOCTYPE html>
 
-<html>
+<html lang="en">
   <title>Single Addition Math</title>
 
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-      <script src="{% static 'math_script.js' %}"></script>
-      
-      
+      <script src="{% static 'add.js' %}"></script>
+      <script src="{% static 'validate.js' %}"></script>
      
-      <link rel="stylesheet" type="text/css "href="{% static 'math.css' %}">
+       <link rel="stylesheet" type="text/css "href="{% static 'math.css' %}">
   </head>
     <body>
       
       {% block content %}
       {% endblock %}
-     
+      
     </body>
 
 </html>

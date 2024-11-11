@@ -11,6 +11,7 @@ from . forms import CreateUserForm, Loginform
 # - Authentication models and functions
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -76,9 +77,12 @@ def home(request):
 
    return render(request, 'mathquiz/home.html')
 
+@login_required
 def index(request):
-  template = loader.get_template('mathquiz/index.html')
-  return HttpResponse(template.render())
+  context={'user':request.user}
+  #template = loader.get_template('mathquiz/index.html')
+  #return HttpResponse(template.render())
+  return render(request, 'mathquiz/index.html', context=context)
 
 def add(request):
   print(request.POST)
@@ -96,6 +100,12 @@ def addTwo(request):
   }
   
   return render(request, "addition_quiz.html", context=context)
+def addThree(request):
+   add = "Three"
+   context = {
+      'add':add
+   }
+   return render(request, "addition_quiz.html", context=context)
 
 @csrf_exempt  
 def submitSingAdd(request):

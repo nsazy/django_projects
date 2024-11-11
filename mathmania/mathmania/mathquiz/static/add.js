@@ -4,6 +4,7 @@ class Add {
   static answerValue = false;
   static problemArray = [];
   static count = 0;
+  
  
 
   constructor(targetElement, add){
@@ -28,6 +29,7 @@ class Add {
    this.break2 = document.createElement("br");
    this.button1 = document.createElement("button");
    this.button2 = document.createElement("button");
+   this.p = document.createElement("p");
 
    //set context
    this.numerator.textContent = a;
@@ -40,12 +42,13 @@ class Add {
    this.input.style = "width:200px;height:40px; text-align: center";
    this.button1.textContent = "Next";
    this.button1.setAttribute("id", "next");
-   //this.button1.id = "next";
-   this.button1.setAttribute('onclick', "addObject.nextProblem()");
+   this.button1.setAttribute('onclick', "myFunction()");
    this.button2.textContent = "Submit";
    this.button2.id = "submit";
    this.button2.style="display:none";
-   this.button2.setAttribute('onclick', "addObject.submitData()");
+   this.button2.setAttribute('onclick', "submit()");
+   this.p.id = "validateMsg";
+   
 
    //append element to the container
    this.targetElement.appendChild(this.numerator);
@@ -56,6 +59,7 @@ class Add {
    this.targetElement.appendChild(this.break2);
    this.targetElement.appendChild(this.button1);
    this.targetElement.appendChild(this.button2);
+   this.targetElement.appendChild(this.p);
   }
   else{
    this.div = document.createElement('div');
@@ -67,6 +71,7 @@ class Add {
    this.break2 = document.createElement("br");
    this.button1 = document.createElement("button");
    this.button2 = document.createElement("button");
+   this.p = document.createElement("p");
 
 
    //set context
@@ -79,13 +84,13 @@ class Add {
    this.input.id = "answer";
    this.input.style = "width:200px;height:40px; text-align: center";
    this.button1.textContent = "Next";
-   //this.button1.id = "next";
    this.button1.setAttribute("id", "next");
-   this.button1.setAttribute('onclick', "addObject.nextProblem()");
+   this.button1.setAttribute('onclick', "myFunction()");
    this.button2.textContent = "Submit";
    this.button2.id = "submit";
    this.button2.style="display:none";
-   this.button2.setAttribute('onclick', "addObject.submitData()");
+   this.button2.setAttribute('onclick', "submit()");
+   this.p.id = "validateMsg";
 
    //append element to the container
    this.targetElement.appendChild(this.numerator);
@@ -96,6 +101,7 @@ class Add {
    this.targetElement.appendChild(this.break2);
    this.targetElement.appendChild(this.button1);
    this.targetElement.appendChild(this.button2);
+   this.p = document.createElement("p");
   }
    }
    
@@ -107,8 +113,12 @@ class Add {
           var b = Math.floor(Math.random() * 10);
           return [a, b];
         case "Two":
-          var a = Math.floor(Math.random() * 101);
-          var b = Math.floor(Math.random() * 101);
+          var a = Math.floor(Math.random() * 100);
+          var b = Math.floor(Math.random() * 100);
+          return [a, b];
+        case "Three":
+          var a = Math.floor(Math.random() * 1000);
+          var b = Math.floor(Math.random() * 1000);
           return [a, b];
     }
     
@@ -120,85 +130,97 @@ class Add {
         // var b = Math.floor(Math.random() * 11);
         // return [a, b];
   }//end getRandomValues
-
-  nextProblem(){
-  
-    Add.count++;
-       
-    this.getData();
-  
-    const[a, b] = this.getRandomValues(this.add);
-    alert("Count is " + Add.count);
+  // checkAns(){
+  //   var x = document.getElementById("answer").value;
+  //   if (x == "" || x == null) {
+  //     alert("Name must be filled out");
+  //     return false;
     
-   if (Add.count == 5){
-        if (a > b){
-          alert("Count is " + Add.count + "a > b");
-          document.getElementById("numerator").textContent = a;
-          document.getElementById("denominator").textContent = b;
-          document.getElementById("next").style.display="none";
-          document.getElementById("submit").style.display="block";
-          document.getElementById("submit").style.margin="auto";
-          document.getElementById("answer").value ="";
-          
-        }else{
-          alert("Count is 2, a < b");
-          document.getElementById("numerator").textContent = b;
-          document.getElementById("denominator").textContent = a;
-          document.getElementById("next").style.display="none";
-          document.getElementById("submit").style.display="block";
-          document.getElementById("submit").style.margin="auto";
-          document.getElementById("answer").value ="";
-          
-        }
-  
-   }
-   else{
-        if(a > b){
-          alert("Count is " + Add.count + "a > b");
-          document.getElementById("numerator").textContent = a;
-          document.getElementById("denominator").textContent = b;
-         
-        }else{
-          alert("Count is " + Add.count + "a < b");
-          document.getElementById("numerator").textContent = b;
-          document.getElementById("denominator").textContent = a;
-          
-        }
-  
-   }
-  
-     
-     
-      document.getElementById("answer").value ="";
-       
-   }//end function nextProblem()
+  // }
+//}'
 
+
+nextProblem(){
+    Add.count++;
+   
+   
+      this.getData();
+     
+       const[a, b] = this.getRandomValues(this.add);
+       alert("Count is " + Add.count);
+       
+      if (Add.count == 5){
+           if (a > b){
+             alert("Count is " + Add.count + "a > b");
+             document.getElementById("numerator").textContent = a;
+             document.getElementById("denominator").textContent = b;
+             document.getElementById("next").style.display="none";
+             document.getElementById("submit").style.display="block";
+             document.getElementById("submit").style.margin="auto";
+             document.getElementById("answer").value ="";
+             
+           }else{
+             alert("Count is 2, a < b");
+             document.getElementById("numerator").textContent = b;
+             document.getElementById("denominator").textContent = a;
+             document.getElementById("next").style.display="none";
+             document.getElementById("submit").style.display="block";
+             document.getElementById("submit").style.margin="auto";
+             document.getElementById("answer").value ="";
+             
+           }
+     
+      }
+      else{
+           if(a > b){
+             alert("Count is " + Add.count + "a > b");
+             document.getElementById("numerator").textContent = a;
+             document.getElementById("denominator").textContent = b;
+            
+           }else{
+             alert("Count is " + Add.count + "a < b");
+             document.getElementById("numerator").textContent = b;
+             document.getElementById("denominator").textContent = a;
+             
+           }
+     
+      }
+     
+        
+        
+         document.getElementById("answer").value ="";
+   }
    getData(){
+    
     var top = parseInt(document.getElementById("numerator").textContent);
     var bottom = parseInt(document.getElementById("denominator").textContent);
     var ans = parseInt(document.getElementById("answer").value);
     var answer = top + bottom;
-    //alert(answer);
-    console.log(answer);
-    // alert("Numerator is " + typeof(top));
-    // alert("Denominator is " + typeof(bottom));
-    // alert("User Answer is " + typeof(ans));
+   
   
-    //alert("Numerator is " + top + " denominator is " + bottom + " answer is " + ans);
-    if ((top + bottom) === ans){
-      //alert("Answer " + answer + " equals answer " + ans);
-      Add.answerValue = true;
-      //alert("Answer Value is " + answerValue);
-      alert("Your answer " + answer + "is correct, Great Job!");
-    }
-    else{
-      Add.answerValue = false;
-      //alert("Answer Value is " + answerValue);
-    }
+      if ((top + bottom) === ans){
+          //alert("Answer " + answer + " equals answer " + ans);
+          Add.answerValue = true;
+          //alert("Answer Value is " + answerValue);
+          alert("Your answer " + answer + "is correct, Great Job!");
+        }
+        else{
+          Add.answerValue = false;
+          //alert("Answer Value is " + answerValue);
+        }
     
     
-    this.pushDataToJSONArray();
+    
+     this.pushDataToJSONArray();
   }//end function getData()
+  checkAns(){
+    
+      
+  }
+   
+  
+  
+  
 
   getCookie(name) {
     let cookieValue = null;

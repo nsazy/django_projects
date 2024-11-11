@@ -9,6 +9,7 @@ urlpatterns = [
     path('user_logout/', views.user_logout, name="user_logout"),
     path('add/', views.add, name='add'),
     path('addTwo/', views.addTwo, name='addTwo'),
+     path('addThree/', views.addThree, name='addThree'),
     path('submitSingAdd/', views.submitSingAdd, name='submitSingAdd'),
   
 

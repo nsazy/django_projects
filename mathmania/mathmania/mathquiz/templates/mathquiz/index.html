@@ -15,7 +15,7 @@
             <div class="dropdown-content">
               <a href="{% url 'add'%}">Single Digit</a>
               <a href="{% url 'addTwo'%}">Double Digit</a>
-              <a href="#">Link 3</a>
+              <a href="{% url 'addThree'%}">Triple Digit</a>
             </div>
         </div>
         <div class="dropdown">
@@ -59,7 +59,11 @@
     </div>
 
 <div id="addMath"  style="font-size: 40px;">
-    <p><h3>Welcome To Math Mania</h3></p> 
+    {% if user.is_authenticated %}
+    <p><h3>Welcome To Math Mania {{user.first_name}}</h3></p> 
+    {% else %}
+    <p>Please Log In</p>
+    {% endif %}
 </div>
 
 
