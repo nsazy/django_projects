@@ -1,4 +1,4 @@
-class Add {
+class Sub {
   
   static c = 0;
   static answerValue = false;
@@ -9,15 +9,15 @@ class Add {
   
  
 
-  constructor(targetElement, add){
+  constructor(targetElement, sub){
     this.targetElement = targetElement
-    this.add = add
+    this.sub = sub
   }
   
    displayProblem(){
   // alert("Add is " + this.add)
    //alert("TargetElement is "+ this.targetElement);
-    const [a, b] = this.getRandomValues(this.add);
+    const [a, b] = this.getRandomValues(this.sub);
    //alert("A is " + a + "B is " + b);
  
    if (a > b){
@@ -35,7 +35,7 @@ class Add {
    //set context
    this.numerator.textContent = a;
    this.numerator.id = "numerator";
-   this.div1.textContent = '+';
+   this.div1.textContent = '-';
    this.div1.id="sign";
    this.denominiator.textContent = b;
    this.denominiator.id = "denominator";
@@ -45,12 +45,12 @@ class Add {
    this.button1.textContent = "Next";
    this.button1.setAttribute("class", "btn btn-primary");
    this.button1.setAttribute("id", "next");
-   this.button1.setAttribute('onclick', "addFunction()");
+   this.button1.setAttribute('onclick', "subFunction()");
    this.button2.textContent = "Submit";
    this.button2.setAttribute("class", "btn btn-primary");
    this.button2.id = "submit";
    this.button2.style="display:none";
-   this.button2.setAttribute('onclick', "addSubmit()");
+   this.button2.setAttribute('onclick', "subSubmit()");
    this.p.id = "validateMsg";
    
 
@@ -80,7 +80,7 @@ class Add {
    //set context
    this.numerator.textContent = b;
    this.numerator.id = "numerator";
-   this.div1.textContent = '+';
+   this.div1.textContent = '-';
    this.div1.id="sign";
    this.denominiator.textContent = a;
    this.denominiator.id = "denominator";
@@ -90,12 +90,12 @@ class Add {
    this.button1.textContent = "Next";
    this.button1.setAttribute("class", "btn btn-primary");
    this.button1.setAttribute("id", "next");
-   this.button1.setAttribute('onclick', "addFunction()");
+   this.button1.setAttribute('onclick', "subFunction()");
    this.button2.textContent = "Submit";
    this.button2.setAttribute("class", "btn btn-primary");
    this.button2.id = "submit";
    this.button2.style="display:none";
-   this.button2.setAttribute('onclick', "addSubmit()");
+   this.button2.setAttribute('onclick', "subSubmit()");
    this.p.id = "validateMsg";
 
    //append element to the container
@@ -111,8 +111,8 @@ class Add {
   }
    }
    
-   getRandomValues(add){
-    switch (add){
+   getRandomValues(sub){
+    switch (sub){
 
         case "One":
           var a = Math.floor(Math.random() * 10);
@@ -131,15 +131,15 @@ class Add {
 }//end getRandomValues
 
 nextProblem(){
-    Add.count++;
+    Sub.count++;
    
    
       this.getData();
      
-       const[a, b] = this.getRandomValues(this.add);
+       const[a, b] = this.getRandomValues(this.sub);
        //alert("Count is " + Add.count);
        
-      if (Add.count == 1){
+      if (Sub.count == 1){
            if (a > b){
              //alert("Count is " + Add.count + "a > b");
              document.getElementById("numerator").textContent = a;
@@ -185,17 +185,17 @@ nextProblem(){
     var top = parseInt(document.getElementById("numerator").textContent);
     var bottom = parseInt(document.getElementById("denominator").textContent);
     var ans = parseInt(document.getElementById("answer").value);
-    Add.systemAnswer = top + bottom;
+    Sub.systemAnswer = top - bottom;
    
   
-      if ((Add.systemAnswer) === ans){
+      if ((Sub.systemAnswer) === ans){
           //alert("Answer " + answer + " equals answer " + ans);
-          Add.answerValue = true;
+          Sub.answerValue = true;
           //alert("Answer Value is " + answerValue);
           alert("Your answer " + ans + " is correct, Great Job!");
         }
         else{
-          Add.answerValue = false;
+          Sub.answerValue = false;
           //alert("Answer Value is " + answerValue);
         }
     
@@ -234,11 +234,11 @@ nextProblem(){
     this.getData();
     //alert(JSON.stringify(problemArray));
       $.ajax({
-      url:'/submitSingAdd/' ,
+      url:'/subSubmit/' ,
       async: true,
       headers:{'X-CSRFToken': csrfToken },
       type: "POST",
-      data: JSON.stringify(Add.problemArray),//JSON.stringify(problemArray)
+      data: JSON.stringify(Sub.problemArray),//JSON.stringify(problemArray)
       contentType: 'application/json',
       success: function(response){
         window.location.href = response["redirect"];
@@ -255,14 +255,14 @@ nextProblem(){
       sign:document.getElementById("sign").textContent,
       denominator:document.getElementById("denominator").textContent,
       answer:document.getElementById("answer").value,
-      systemAnswer:Add.systemAnswer,
-      answerValue:Add.answerValue
+      systemAnswer:Sub.systemAnswer,
+      answerValue:Sub.answerValue
      
     };
-  Add.problemArray.push(problem);
+  Sub.problemArray.push(problem);
   //alert(JSON.stringify(problemArray));
   } 
-}//end class Add
+}//end class Sub
 
 
 

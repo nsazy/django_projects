@@ -1,0 +1,36 @@
+{% extends "mathquiz/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<body onload="addObject.displayProblem()">
+
+
+
+<div class="newdiv">
+   <div class="card text-center">
+    <div class = "card-body" style="background-color: lightgrey;">
+        <div class="submitAnswer" id ="addMath">
+
+
+        </div>
+       
+
+    </div>
+   
+
+   </div>
+    
+   
+
+
+</div>
+
+<script> 
+    const container = document.getElementById("addMath");
+    const addObject = new Add(container,"{{add}}");
+</script>   
+</body>
+{% endblock %}
+

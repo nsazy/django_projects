@@ -23,9 +23,9 @@
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-              <a href="add/">Single Digit</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
+              <a href="{% url 'subOne'%}">Single Digit</a>
+              <a href="{% url 'subTwo'%}">Double Digit</a>
+              <a href="{% url 'subThree'%}">Triple Digit</a>
             </div>
         </div>
         <div class="dropdown">
@@ -33,9 +33,9 @@
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-              <a href="add/">Single Digit</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
+              <a href="{% url 'mulOne'%}">Single Digit</a>
+              <a href="{% url 'mulTwo'%}">Double Digit</a>
+              <a href="{% url 'mulThree'%}">Triple Digit</a>
             </div>
         </div>
         <div class="dropdown">
@@ -43,11 +43,20 @@
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-              <a href="add/">Single Digit</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
+              <a href="{% url 'divOne'%}">Single Digit</a>
+              <a href="{% url 'divTwo'%}">Double Digit</a>
+              <a href="{% url 'divThree'%}">Triple Digit</a>
             </div>
         </div>
+        <div class="dropdown">
+          <button class="dropbtn">Answers
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="{% url 'getResults'%}">Get Answers</a>
+            
+          </div>
+      </div>
         <div class="dropdown">
           <button class="dropbtn">Logout
             <i class="fa fa-caret-down"></i>
@@ -59,11 +68,9 @@
     </div>
 
 <div id="addMath"  style="font-size: 40px;">
-    {% if user.is_authenticated %}
-    <p><h3>Welcome To Math Mania {{user.first_name}}</h3></p> 
-    {% else %}
-    <p>Please Log In</p>
-    {% endif %}
+   
+    <p><h3>Welcome To Math Mania {{request.user}}</h3></p> 
+   
 </div>
 
 

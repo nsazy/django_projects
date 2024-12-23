@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<body onload="subObject.displayProblem()">
+
+
+
+<div class = "newdiv">
+   <div class="card text-center">
+    <div class = "card-body" style="background-color: lightgrey;">
+        <div class="submiAnswer" id ="subMath">
+
+
+        </div>
+        <script> 
+            const subContainer = document.getElementById("subMath");
+            const subObject = new Sub(subContainer,"{{sub}}");
+        </script>
+
+    </div>
+   
+
+   </div>
+    
+   
+
+
+</div>
+
+      
+</body>
+{% endblock %}
+

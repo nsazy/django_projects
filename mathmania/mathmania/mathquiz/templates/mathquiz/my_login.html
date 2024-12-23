@@ -1,17 +1,24 @@
-<html>
+{% extends "mathquiz/base.html" %}
 
-    {% block title %}
-    Register New User
-    {% endblock %}
+    
 
     {% block content %}
-    <h1>User Login</h1>
-    <form method="post" autocomplete="off">
-        {% csrf_token %}
-        {{ loginform.as_p }}
-        <button>Login</button>
-    </form>
+    <div class="card text-center" style="background-color:lightgray;">
+        <h1 class="card-title">Please enter username and password below</h1>
+        <div class="card-body">
+            <form action="my_login" method="post" autocomplete="off">
+                {% csrf_token %}
+                {{ loginform.as_p }}
+                {% for message in messages%}
+                    <p>{{message}}</p>
+                {% endfor %}
+                <button type"button" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+ 
+    
     {% endblock %}
 
-</html>
+
 

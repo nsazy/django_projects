@@ -11,7 +11,19 @@ urlpatterns = [
     path('addTwo/', views.addTwo, name='addTwo'),
      path('addThree/', views.addThree, name='addThree'),
     path('submitSingAdd/', views.submitSingAdd, name='submitSingAdd'),
-  
+    path('subSubmit/', views.subSubmit, name='subSubmit'),
+    path('subOne/', views.subOne, name='subOne'),
+    path('subTwo/', views.subTwo, name='subTwo'),
+    path('subThree/', views.subThree, name='subThree'),
+    path('mulSubmit/', views.mulSubmit, name='mulSubmit'),
+    path('mulOne/', views.mulOne, name='mulOne'),
+    path('mulTwo/', views.mulTwo, name='mulTwo'),
+    path('mulThree/', views.mulThree, name='mulThree'),
+    path('divSubmit/', views.divSubmit, name='divSubmit'),
+    path('divOne/', views.divOne, name='divOne'),
+    path('divTwo/', views.divTwo, name='divTwo'),
+    path('divThree/', views.divThree, name='divThree'),
+    path('getResults/', views.getResults, name='getResults'),
 
 ]
 

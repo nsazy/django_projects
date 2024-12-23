@@ -1,0 +1,35 @@
+{% extends "mathquiz/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<body onload="subObject.displayProblem()">
+
+
+
+<div class="newdiv">
+   <div class="card text-center">
+    <div class = "card-body" style="background-color: lightgrey;">
+        <div class="submitAnswer" id ="subMath">
+
+
+        </div>
+       
+
+    </div>
+   
+
+   </div>
+    
+   
+
+
+</div>
+
+<script> 
+    const container = document.getElementById("subMath");
+    const subObject = new Sub(container,"{{sub}}");
+</script>   
+</body>
+{% endblock %}

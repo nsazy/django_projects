@@ -1,0 +1,35 @@
+{% extends "mathquiz/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<body onload="divObject.displayProblem()">
+
+
+
+<div class="newdiv">
+   <div class="card text-center">
+    <div class = "card-body" style="background-color: lightgrey;">
+        <div class="submitAnswer" id ="divMath">
+
+
+        </div>
+       
+
+    </div>
+   
+
+   </div>
+    
+   
+
+
+</div>
+
+<script> 
+    const container = document.getElementById("divMath");
+    const divObject = new Div(container,"{{div}}");
+</script>   
+</body>
+{% endblock %}

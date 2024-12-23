@@ -260,3 +260,36 @@ data.forEach(element => {
 //     });
 
 
+// {/* <h1>Welcom to Math Mania</h1>
+//     <button><a href="{% url 'register'%}">Please register</a></button>
+//     <button><a href="{% url 'my_login'%}">Please login</a></button>
+//     <button><a href="{% url 'user_logout'%}">Logout</a></button> */}
+// {/* <link rel="stylesheet" type="text/css "href="{% static 'math.css' %}"> 
+
+// {% block content %}
+//     <button><a href="{% url 'index'%}">Go To Dashboard</a></button>
+//     <button><a href="{% url 'add'%}">Do More Problems</a></button>
+   
+   
+//     <div class="grid-container" >
+//         {% for item in problemList %}
+//         <div>
+//             <label>{{ item.numerator }}</label><BR>
+//                 <label>+</label><BR>
+//                 <label>{{ item.denominator }}</label><BR>
+//                 <label>-----------------------</label><BR>
+//                     {% if item.answerValue == True %}
+//                         <label class="correct"> {{ item.answer }}</label><BR>
+//                     {% else %}
+//                         <label> {{ item.answer }}</label><BR>
+//                     {% endif %}
+//                   <BR>
+            
+//         </div>
+//         {% endfor %}
+//     </div>
+  
+    
+// {% endblock %} */}
+
+//<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

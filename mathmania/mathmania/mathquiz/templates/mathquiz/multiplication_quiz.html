@@ -1,0 +1,35 @@
+{% extends "mathquiz/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<body onload="mulObject.displayProblem()">
+
+
+
+<div class="newdiv">
+   <div class="card text-center">
+    <div class = "card-body" style="background-color: lightgrey;">
+        <div class="submitAnswer" id ="mulMath">
+
+
+        </div>
+       
+
+    </div>
+   
+
+   </div>
+    
+   
+
+
+</div>
+
+<script> 
+    const container = document.getElementById("mulMath");
+    const mulObject = new Mul(container,"{{mul}}");
+</script>   
+</body>
+{% endblock %}
