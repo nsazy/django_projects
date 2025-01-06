@@ -38,7 +38,7 @@ class Div {
      //set context
      this.numerator.textContent = a;
      this.numerator.id = "numerator";
-     this.div1.textContent = '/';
+     this.div1.textContent = "÷";
      this.div1.id="sign";
      this.denominiator.textContent = b;
      this.denominiator.id = "denominator";
@@ -83,7 +83,7 @@ class Div {
      //set context
      this.numerator.textContent = b;
      this.numerator.id = "numerator";
-     this.div1.textContent = '/';
+     this.div1.textContent = "÷";
      this.div1.id="sign";
      this.denominiator.textContent = a;
      this.denominiator.id = "denominator";
@@ -231,13 +231,25 @@ class Div {
           //ans = parseInt(ans);
           //alert("For denominator 0, ans is type " + typeof(ans));
           if (ans === Div.systemAnswer){
+            alert(" when bottom is zero ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
+            Div.answerValue = True;
             alert("Your answer " + ans + " is correct, great job!");
+          }
+          else{
+            alert(" when bottom is zero ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
+            Div.answerValue = False;
           }
         }
       else{
         Div.systemAnswer = top / bottom;
         if (ans === Div.systemAnswer){
+          alert("ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
+          Div.answerValue = True;
           alert("Your answer " + ans + " is correct, great job!");
+        }
+        else{
+          alert("ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
+          Div.answerValue = False;
         }
 
       }
@@ -362,8 +374,15 @@ class Div {
         data: JSON.stringify(Div.problemArray),//JSON.stringify(problemArray)
         contentType: 'application/json',
         success: function(response){
-          window.location.href = response["redirect"];
-          }, 
+        console.log(response);  
+        window.location.href = response["redirect"];
+         // window.location.href = response.redirect_url;
+         //console.log(data);
+        //$('.newdiv').html(data);
+       // var newNode = document.getElementById('#math_results');
+        //var content = document
+          //document.getElementById("math_results").textContent = data.data;
+         } , 
         failure: function( error){
           alert("Error sending data", error);
         }
@@ -384,4 +403,4 @@ class Div {
       Div.problemArray.push(problem);
     //alert(JSON.stringify(problemArray));
     } 
-  }//end class Sub
+  }//end class Div

@@ -94,4 +94,9 @@ button{
     text-align: center;
     justify-content: space-evenly;
 }
+.datepicker.dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  width: auto;
+ }
 

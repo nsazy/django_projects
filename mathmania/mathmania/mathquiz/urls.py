@@ -24,6 +24,7 @@ urlpatterns = [
     path('divTwo/', views.divTwo, name='divTwo'),
     path('divThree/', views.divThree, name='divThree'),
     path('getResults/', views.getResults, name='getResults'),
+    path('displayDivAnswers/', views.displayDivAnswers, name='displayDivAnswers'),
 
 ]
 

@@ -11,22 +11,24 @@
     <br>
     
         <div class="row">
-            {% for item in results %}
+            <div class="math_results">
+            {% for item in data %}
                 <div class="col-md-4">
                     <label>{{ item.numerator }}</label><BR>
                         <label>{{item.sign}}</label><BR>
                          <label>{{ item.denominator }}</label><BR>
                          <label>-----------------</label><BR>
                              {% if item.answerValue == 1 %}
-                                  <label class="correct"> {{ item.userAnswer }}</label><BR>
+                                  <label class="correct"> {{ item.answer }}</label><BR>
                              {% else %}
-                                 <label> {{ item.userAnswer }}</label><BR>
+                                 <label> {{ item.answer }}</label><BR>
                              {% endif %}
                             <BR>
                 </div>
             {% endfor %}
+             </div>
         </div>
-
+    
     
        
     

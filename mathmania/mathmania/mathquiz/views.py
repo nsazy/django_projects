@@ -18,6 +18,7 @@ from django.contrib import messages
 from .decorators import unauthenticated_user
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.template.loader import render_to_string
 
 from .models import Results
 
@@ -307,20 +308,28 @@ def divSubmit(request):
             systemAnswer = item.get('systemAnswer')
             answerValue = item.get('answerValue')
             Results.objects.create(student=user, numerator=numerator, sign=sign, denominator=denominator, userAnswer=answer, systemAnswer=systemAnswer, answerValue=answerValue)
-            
-          
-    return JsonResponse({"redirect":'/index'}, status=200)
+    request.session['data'] = data
+    #return JsonResponse({"redirect":'/index'}, status=200)
+    return JsonResponse({"redirect":'/displayDivAnswers/'})
+
+
+def displayDivAnswers(request):
+   #json_data = request.session.get('json_data')
+   data = request.session.get('data')
+   print(data)
+   #data = json.loads(json_data)
+   return render(request, 'mathquiz/answers.html', {'data':data})
 
 def getResults(request):
-   user = request.user
-   results = Results.objects.filter(student_id = user)
-   context= {
-      'results': results
-   }
+   # user = request.user
+   # results = Results.objects.filter(student_id = user)
+   # context= {
+   #    'results': results
+   # }
    # for x in results:
    #    print(x.userAnswer)
    #    print(x.denominator)
    
 
-   return render(request, "mathquiz/answers.html", context=context)
+   return render(request, "mathquiz/math_results.html")
    #return HttpResponse("Hello")

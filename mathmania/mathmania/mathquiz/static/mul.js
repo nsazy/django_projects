@@ -36,6 +36,7 @@ class Mul {
      this.numerator.textContent = a;
      this.numerator.id = "numerator";
      this.div1.textContent = 'x';
+     this.div1.setAttribute("class", "bi bi-x-lg");
      this.div1.id="sign";
      this.denominiator.textContent = b;
      this.denominiator.id = "denominator";
@@ -81,6 +82,7 @@ class Mul {
      this.numerator.textContent = b;
      this.numerator.id = "numerator";
      this.div1.textContent = 'x';
+     this.div1.setAttribute("class", "bi bi-x-lg");
      this.div1.id="sign";
      this.denominiator.textContent = a;
      this.denominiator.id = "denominator";
@@ -139,7 +141,7 @@ class Mul {
          const[a, b] = this.getRandomValues(this.mul);
          //alert("Count is " + Add.count);
          
-        if (Mul.count == 1){
+        if (Mul.count == 9){
              if (a > b){
                //alert("Count is " + Add.count + "a > b");
                document.getElementById("numerator").textContent = a;

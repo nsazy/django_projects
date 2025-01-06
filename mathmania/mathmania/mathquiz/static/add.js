@@ -139,7 +139,7 @@ nextProblem(){
        const[a, b] = this.getRandomValues(this.add);
        //alert("Count is " + Add.count);
        
-      if (Add.count == 1){
+      if (Add.count == 9){
            if (a > b){
              //alert("Count is " + Add.count + "a > b");
              document.getElementById("numerator").textContent = a;

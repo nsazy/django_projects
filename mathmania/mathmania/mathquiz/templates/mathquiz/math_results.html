@@ -1,0 +1,25 @@
+{% extends "mathquiz/base.html" %}
+
+{% block content %}
+<label for="datepicker">Select a date:</label>
+<input type="text" id="datepicker_from" name='from' size='9' value="" /> 
+
+
+<script>
+     $(function()
+                {
+                         $( "#datepicker" ).datepicker();
+                         $("#icon").click(function() { $("#datepicker").datepicker( "show" );})
+                 });
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+    
