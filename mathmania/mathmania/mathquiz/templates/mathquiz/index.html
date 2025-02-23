@@ -48,29 +48,23 @@
               <a href="{% url 'divThree'%}">Triple Digit</a>
             </div>
         </div>
-        <div class="dropdown">
-          <button class="dropbtn">Answers
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="{% url 'getResults'%}">Get Answers</a>
-            
-          </div>
-      </div>
-        <div class="dropdown">
-          <button class="dropbtn">Logout
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="user_logout/">Logout</a>
-          </div>
-      </div>
-    </div>
+  <div>
+    <span><a class="btn btn-primary btn-lg" href="{% url 'getResults'%}">Test Archive</a></span> 
+    <span><a class="btn btn-primary btn-lg" href="{% url 'user_logout'%}">Logout</a></span>         
+  </div>      
+  
+</div>
+
 
 <div id="addMath"  style="font-size: 40px;">
    
     <p><h3>Welcome To Math Mania {{request.user.first_name}}</h3></p> 
+    
+    
    
+</div>
+<div class="container">
+  
 </div>
 
 

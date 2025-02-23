@@ -144,6 +144,9 @@
   //});//end 
 
 
+  //<a class="btn btn-primary" href="{% url 'add'%}">Do More Problems</a>
+
+
   // addition(){
     
   //   if (this.a > this.b){

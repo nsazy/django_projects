@@ -19,6 +19,13 @@ from .decorators import unauthenticated_user
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.template.loader import render_to_string
+from django.db.models.functions import Trunc
+from django.db.models.functions import TruncDate, TruncTime, TruncMinute
+from django.db.models import Count, Q
+from django.db.models import F, Func
+from django.db.models.functions import ExtractHour, ExtractMinute, ExtractSecond
+from collections import defaultdict
+
 
 from .models import Results
 
@@ -31,59 +38,65 @@ userData ={}
 # - Create a User
 @unauthenticated_user
 def register(request):
-   
-   form = CreateUserForm()
+   if request.user.is_authenticated:
+      return redirect('index') #is_authenticated is a property
+   else:
+      form = CreateUserForm()
 
-   if request.method == "POST":
-      
-      form = CreateUserForm(request.POST)
-
-      if form.is_valid():
+      if request.method == "POST":
          
-         form.save()
+         form = CreateUserForm(request.POST)
 
-         return redirect("my_login")
+         if form.is_valid():
+            
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + user)
+            return redirect("my_login")
     
-   context = {'registerform': form}
+         context = {'form': form}
 
-   return render(request, "mathquiz/register.html", context=context)
+         return render(request, "mathquiz/register.html", context=context)
 
 # - Authenticate User
 @unauthenticated_user
 def my_login(request):
+   if request.user.is_authenticated:
+      return redirect('index') #is_authenticated is a property
+   else:
+         form = Loginform()
 
-   form = Loginform()
+         if request.method == 'POST':
 
-   if request.method == 'POST':
+            form = Loginform(request, data=request.POST)#data is sent to server as a post request
 
-      form = Loginform(request, data=request.POST)#data is sent to server as a post request
+            #if form.is_valid():
 
-      if form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
-         username = request.POST.get('username')
-         password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
 
-         user = authenticate(request, username=username, password=password)
+            #if user exists
+            if user is not None:
 
-         #if user exists
-         if user is not None:
+               #allow user to login with the request
+               auth.login(request, user)
+               return redirect("index")
+            else:
+               
+               messages.info(request, 'Username and/or password not correct.')
+               #return render(request, "mathquiz/my_login.html", context=context)
 
-            #allow user to login with the request
-            auth.login(request, user)
-            return redirect("index")
-         else:
-            messages.info(request, "Usernmae and/or password not correct.")
-            return render(request, "mathquiz/my_login.html", context=context)
-   
-   context = {'loginform':form}
+         context = {'loginform':form}
 
-   return render(request, "mathquiz/my_login.html", context=context)
+         return render(request, "mathquiz/my_login.html", context=context)
 
 def user_logout(request):
 
    auth.logout(request)
 
-   return redirect("home")
+   return redirect("my_login")
 
 
 def home(request):
@@ -178,9 +191,9 @@ def submitSingAdd(request):
             systemAnswer = item.get('systemAnswer')
             answerValue = item.get('answerValue')
             Results.objects.create(student=user, numerator=numerator, sign=sign, denominator=denominator, userAnswer=answer, systemAnswer=systemAnswer, answerValue=answerValue)
-            
-          
-    return JsonResponse({"redirect":'/index'}, status=200)
+    request.session['data'] = data
+    #return JsonResponse({"redirect":'/index'}, status=200)
+    return JsonResponse({"redirect":'/displayAnswers/'})
 @csrf_exempt  
 def subSubmit(request):
      
@@ -203,9 +216,9 @@ def subSubmit(request):
             systemAnswer = item.get('systemAnswer')
             answerValue = item.get('answerValue')
             Results.objects.create(student=user, numerator=numerator, sign=sign, denominator=denominator, userAnswer=answer, systemAnswer=systemAnswer, answerValue=answerValue)
-            
-          
-    return JsonResponse({"redirect":'/index'}, status=200)
+    request.session['data'] = data
+    #return JsonResponse({"redirect":'/index'}, status=200)
+    return JsonResponse({"redirect":'/displayAnswers/'})
 @login_required(login_url='my_login')
 def mulOne(request):
   print(request.POST)
@@ -255,9 +268,9 @@ def mulSubmit(request):
             systemAnswer = item.get('systemAnswer')
             answerValue = item.get('answerValue')
             Results.objects.create(student=user, numerator=numerator, sign=sign, denominator=denominator, userAnswer=answer, systemAnswer=systemAnswer, answerValue=answerValue)
-            
-          
-    return JsonResponse({"redirect":'/index'}, status=200)
+    request.session['data'] = data
+    #return JsonResponse({"redirect":'/index'}, status=200)
+    return JsonResponse({"redirect":'/displayAnswers/'})
 
 @login_required(login_url='my_login')
 def divOne(request):
@@ -310,10 +323,10 @@ def divSubmit(request):
             Results.objects.create(student=user, numerator=numerator, sign=sign, denominator=denominator, userAnswer=answer, systemAnswer=systemAnswer, answerValue=answerValue)
     request.session['data'] = data
     #return JsonResponse({"redirect":'/index'}, status=200)
-    return JsonResponse({"redirect":'/displayDivAnswers/'})
+    return JsonResponse({"redirect":'/displayAnswers/'})
 
 
-def displayDivAnswers(request):
+def displayAnswers(request):
    #json_data = request.session.get('json_data')
    data = request.session.get('data')
    print(data)
@@ -321,15 +334,61 @@ def displayDivAnswers(request):
    return render(request, 'mathquiz/answers.html', {'data':data})
 
 def getResults(request):
-   # user = request.user
-   # results = Results.objects.filter(student_id = user)
-   # context= {
-   #    'results': results
-   # }
-   # for x in results:
-   #    print(x.userAnswer)
-   #    print(x.denominator)
-   
+   problem_data={}
+   user = request.user
+   print(user)
+   #results = Results.objects.filter(student_id = user).annotate(time=Trunc('dateCreated', 'minute')).values('time').annotate(count=Count('id'))                                                           
+   #results = Results.objects.filter(student_id = user).annotate(date=Trunc('dateCreated','day'), time=Trunc('dateCreated','minute')).values('date','time').annotate(count=Count('id'))
+   #results = Results.objects.filter(student_id = user).annotate(date=TruncDate('dateCreated'), time=TruncTime('dateCreated')).values('date','time').annotate(count=Count('id'))
+   results = Results.objects.filter(student_id = user).annotate(date=TruncDate('dateCreated')).values('date').annotate(count=Count('id'))#TruncDate will give the date only
+   # results = Results.objects.filter(student_id = user).annotate(
+   #  day=Trunc('dateCreated', 'day')
+   # ).values('day').annotate(
+   #  count=Count('id')
+   # )
+   problem_dict ={}
+  
+  
+   for event in results:
+      print(event['date'], event['count'], type(event['date']))
+      time_results = Results.objects.filter(student_id = user, dateCreated__contains = event['date']).annotate(time = Trunc('dateCreated', 'second')).values('time').annotate(count=Count('id'))
+      #final_date = event['date'].strftime('%Y%m%d')
+      if event['date'] not in problem_dict:
+            problem_dict[event['date']] =[]
+      
+      print(event['date'])
+      
+      
+      for time in time_results:
+         inner_dict ={}
+         new_time = time['time'].strftime('%Y%m%d %H:%M:%S')
+         conv_time = datetime.datetime.strptime(new_time,'%Y%m%d %H:%M:%S')
+         final_time = conv_time.time()
+         #seconds = (final_time.hour * 3600) + (final_time.minute * 60) + final_time.second
+         print(final_time)
 
-   return render(request, "mathquiz/math_results.html")
+         problem_dict[event['date']].append({
+            'time':final_time
+         })
+   print(problem_dict)    
+           
+
+   context = {'problem_dict':problem_dict}    
+   return render(request, "mathquiz/math_results.html", context=context)
    #return HttpResponse("Hello")
+
+def mathResultsDetails(request, date, time):
+  
+   user = request.user
+   problems = Results.objects.filter(student_id = user, dateCreated__contains = date).filter(dateCreated__contains = time).values()
+   for problem in problems:
+      print(problem)
+   date_time = Results.objects.filter(student_id = user, dateCreated__contains = date).annotate(date=TruncDate('dateCreated')).filter(dateCreated__contains = time).annotate(time=TruncTime('dateCreated'))[:1].values('date', 'time')
+   for dt in date_time:
+      print(dt)
+   context = {
+         'date_time':date_time,
+         'problems':problems
+   }
+   return render(request, 'mathquiz/math_resultsdetails.html', context=context)
+   #return HttpResponse("hello")

@@ -1,18 +1,38 @@
 {% extends "mathquiz/base.html" %}
 
 {% block content %}
-<label for="datepicker">Select a date:</label>
-<input type="text" id="datepicker_from" name='from' size='9' value="" /> 
+<div class="container">
+        <div class="navbar-header">
+            <a class="btn btn-primary" href="{% url 'index'%}">Dashboaard</a>
+            
+        </div>
+        <br>
+        
+            <div class="row">
+                
+                {% for date, value in problem_dict.items %}
+                    <div class="col-md-4">
+                        <label>{{ date }}</label><BR>
+                        {% for t in value %}
+                        
+                        
+                        <a class="btn btn-primary" href="{% url 'mathResultsDetails' date t.time %}">{{ t.time }}</a>
+
+                        {% endfor %}
+                       
+                         
+                    </div>
+                {% endfor %}
+                 
+            </div>
+        
+        
+           
+        
+    </div>
 
 
-<script>
-     $(function()
-                {
-                         $( "#datepicker" ).datepicker();
-                         $("#icon").click(function() { $("#datepicker").datepicker( "show" );})
-                 });
 
-</script>
 
 
 {% endblock %}

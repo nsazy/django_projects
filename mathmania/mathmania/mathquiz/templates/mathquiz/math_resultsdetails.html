@@ -1,0 +1,43 @@
+{% extends "mathquiz/base.html" %}
+
+{% block content %}
+<div class="container">
+        <div class="navbar-header">
+            <a class="btn btn-primary" href="{% url 'index'%}">Dashboaard</a>
+            <button onclick="window.print()">Print</button>
+            <div>
+                {% for dt in date_time %}
+                <label>Name: {{request.user.first_name}} {{request.user.last_name}}</label><BR>
+                <label>{{ dt.date }} {{ dt.time }}</label><BR>
+                
+                {% endfor %}
+            </div>
+            
+        </div>
+        <br>
+        
+        <div class="row">
+                
+            {% for p in problems %}
+            <div class="col-sm-4">
+                    
+                    
+                <label>{{ p.numerator }}</label><BR>
+                <label>{{p.sign}}</label><BR>
+                    <label>{{ p.denominator }}</label><BR>
+                    <label>______</label><BR>
+                        {% if p.answerValue == 1 %}
+                            <label class="correct"> {{ p.userAnswer }}</label><BR>
+                        {% else %}
+                            <label> {{ p.userAnswer }}</label><BR>
+                        {% endif %}
+                    <BR>
+
+                    
+            </div>  
+            {% endfor %}
+             
+        </div>
+             
+</div>
+{% endblock %}

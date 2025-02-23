@@ -6,12 +6,12 @@
 <div class="container">
     <div class="navbar-header">
         <a class="btn btn-primary" href="{% url 'index'%}">Dashboaard</a>
-        <a class="btn btn-primary" href="{% url 'add'%}">Do More Problems</a>
+        
     </div>
     <br>
     
         <div class="row">
-            <div class="math_results">
+            
             {% for item in data %}
                 <div class="col-md-4">
                     <label>{{ item.numerator }}</label><BR>
@@ -26,7 +26,7 @@
                             <BR>
                 </div>
             {% endfor %}
-             </div>
+             
         </div>
     
     

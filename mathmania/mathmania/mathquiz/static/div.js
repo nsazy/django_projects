@@ -179,7 +179,7 @@ class Div {
          const[a, b] = this.getRandomValues(this.div);
          //alert("Count is " + Add.count);
          
-        if (Div.count == 1){
+        if (Div.count == 9){
              if (a > b){
                //alert("Count is " + Add.count + "a > b");
                document.getElementById("numerator").textContent = a;
@@ -231,25 +231,25 @@ class Div {
           //ans = parseInt(ans);
           //alert("For denominator 0, ans is type " + typeof(ans));
           if (ans === Div.systemAnswer){
-            alert(" when bottom is zero ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
-            Div.answerValue = True;
+            // alert(" when bottom is zero ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
+            Div.answerValue = true;
             alert("Your answer " + ans + " is correct, great job!");
           }
           else{
-            alert(" when bottom is zero ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
-            Div.answerValue = False;
+            // alert(" when bottom is zero ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
+            Div.answerValue = false;
           }
         }
       else{
         Div.systemAnswer = top / bottom;
         if (ans === Div.systemAnswer){
-          alert("ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
-          Div.answerValue = True;
+          // alert("ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
+          Div.answerValue = true;
           alert("Your answer " + ans + " is correct, great job!");
         }
         else{
-          alert("ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
-          Div.answerValue = False;
+          // alert("ans === Div.systemAnswer is " + (ans === Div.systemAnswer));
+          Div.answerValue = false;
         }
 
       }
@@ -376,12 +376,7 @@ class Div {
         success: function(response){
         console.log(response);  
         window.location.href = response["redirect"];
-         // window.location.href = response.redirect_url;
-         //console.log(data);
-        //$('.newdiv').html(data);
-       // var newNode = document.getElementById('#math_results');
-        //var content = document
-          //document.getElementById("math_results").textContent = data.data;
+        
          } , 
         failure: function( error){
           alert("Error sending data", error);
